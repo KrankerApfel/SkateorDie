@@ -20,7 +20,7 @@ public class Obstacle implements GameObject{
 
     public Obstacle(int color){
         this.spawnX = (int) (Math.random() * (4*Constants.SCREEN_HEIGTH - (2*Constants.SCREEN_HEIGTH))) + (2*Constants.SCREEN_HEIGTH);
-        this.spawnY = (int) (Math.random() * ((Constants.SCREEN_WIDTH ) - 500)) + 500; // int random = (int)(Math.random() * (higher-lower)) + lower ==> [lower,higher[
+        this.spawnY = (int) (Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150; // int random = (int)(Math.random() * (higher-lower)) + lower ==> [lower,higher[
         this.rec = new Rect(spawnX, spawnY,spawnX+100,spawnY+100);
         this.color = color;
     }
@@ -35,8 +35,8 @@ public class Obstacle implements GameObject{
         this.rec.left  -= spd;
         this.rec.right -= spd;
 
-        if(this.rec.left < 0){
-            spawnY = (int) (Math.random() * (Constants.SCREEN_WIDTH - 100)) + 100;
+        if(this.rec.right < 0){
+            spawnY = (int)(Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150;
             this.set(spawnX, spawnY,spawnX+100,spawnY+100);
         }
     }
