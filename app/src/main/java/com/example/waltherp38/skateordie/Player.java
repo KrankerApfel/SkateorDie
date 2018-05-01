@@ -13,6 +13,8 @@ public class Player implements GameObject {
         this.color = color;
     }
 
+    @Override
+    public Rect getRectangle() { return this.rec; }
 
     @Override
     public void draw(Canvas canvas) {

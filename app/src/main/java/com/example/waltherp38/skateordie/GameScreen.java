@@ -21,11 +21,13 @@ import android.view.SurfaceView;
 
 public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;   // thread pour la gestion de l'affichage
+    private ObstacleManager om;
     private Player skater;       // class modélisant le joueur
     private Point  skaterPoint;  // position du joueur
     private Bitmap bkg;          //  image background
     private Bitmap life[];       // tableau des images pour les vies
     private Paint p;             // un paint est ce qui permet de gérer la taille et la couleur du texte.
+    private Timer timer;
 
     /**
     * Utilise le context de la view dans laquelle l'écran de jeu est intégré
@@ -37,6 +39,9 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
 
+        om = new ObstacleManager();
+        this.timer = new Timer();
+
         skater = new Player(new Rect(100,100,200,200), Color.rgb(255,0,0));
         skaterPoint = new Point(150,150);
 
@@ -47,6 +52,8 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         life[0]    = BitmapFactory.decodeResource(getResources(),R.drawable.heart3);
         life[1]    = BitmapFactory.decodeResource(getResources(),R.drawable.heart2);
         life[2]    = BitmapFactory.decodeResource(getResources(),R.drawable.heart1);
+
+        bkg        = BitmapFactory.decodeResource(getResources(),R.drawable.road);
 
         // tout ce qui concerne la font et color
         p.setColor(Color.BLUE);
@@ -93,16 +100,20 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update(){
         skater.update(skaterPoint);
+        om.update();
+        timer.tick();
     }
 
     @Override
     public void draw(Canvas canvas) {
+
         super.draw(canvas);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawText("Score :", 20,60,p);
+        canvas.drawColor(Color.rgb(119,208,130));
+        canvas.drawBitmap(bkg, 0, canvas.getHeight() - bkg.getHeight(),null);
+        canvas.drawText("Time :"+timer.getLabel(), 20,60,p);
         canvas.drawBitmap(life[0], (canvas.getWidth()/2)-100,50,null);
+        om.draw(canvas);
         skater.draw(canvas);
-        
     }
 
 }
