@@ -11,6 +11,10 @@ public class Timer {
         label = h+":"+m+":"+s;
     }
 
+    public void reset(){
+        h=m=s=0;
+        label = h+":"+m+":"+s;}
+
     public void tick(){
         s++;
         if(s==60) {

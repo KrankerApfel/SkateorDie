@@ -26,10 +26,8 @@ public class Obstacle implements GameObject{
     }
 
     public boolean collide(Player player){
-        if (this.rec.contains(player.getRectangle())) return  true;
-        return false;
+        return Rect.intersects(this.rec,player.getRectangle());
     }
-
 
     public void move(float spd ){
         this.rec.left  -= spd;

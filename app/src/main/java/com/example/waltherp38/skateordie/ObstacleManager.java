@@ -21,12 +21,16 @@ public class ObstacleManager {
     }
 
     private void generateObstacles(){
-
         for (int i = 0 ; i <5 ; i++) {
             obstacles.add(new Obstacle(Color.rgb(0,55,200)));
         }
+    }
 
-
+    public boolean collide(Player player){
+        for (Obstacle obstacle: obstacles) {
+            if (obstacle.collide(player)) return true;
+        }
+        return false;
     }
 
     public void update(){
