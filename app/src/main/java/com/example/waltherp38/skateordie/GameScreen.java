@@ -30,6 +30,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private Point  skaterPoint;  // position du joueur
     private Bitmap bkg;          //  image background
     private Bitmap life[];       // tableau des images pour les vies
+    private int heart;
     private Paint p;             // un paint est ce qui permet de gérer la taille et la couleur du texte.
     private Timer timer;
 
@@ -51,6 +52,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         playerIsMoving = false;
         gameOver = false;
 
+        heart      = 0;
         life       = new Bitmap[3];
         p          = new Paint();
 
@@ -69,6 +71,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
 
     public void reset(){
         timer.reset();
+        heart = 0;
         skaterPoint = new Point(Constants.SCREEN_WIDTH/5,3*Constants.SCREEN_HEIGTH/4);
         playerIsMoving = false;
         om = new ObstacleManager();
@@ -107,7 +110,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
                 if (!gameOver && skater.getRectangle().contains((int) event.getX(), (int) event.getY())){
                     playerIsMoving = true;
                 }
-                else if (gameOver && System.currentTimeMillis() - gameOverTime >= 2000){
+                else if (gameOver && System.currentTimeMillis() - gameOverTime >= 1000){
                     this.reset();
                     gameOver = false;
                 }break;
@@ -129,8 +132,12 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
             om.update();
             timer.tick();
             if(om.collide(skater)) {
-                gameOver = true;
-                gameOverTime = System.currentTimeMillis();
+                heart++;
+                if (heart >= 3){
+                    gameOver = true;
+                    gameOverTime = System.currentTimeMillis();
+                }
+
             }
         }
     }
@@ -143,7 +150,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawColor(Color.rgb(119,208,130));
             canvas.drawBitmap(bkg, 0, canvas.getHeight() - bkg.getHeight(),null);
             canvas.drawText("Time :"+timer.getLabel(), 20,60,p);
-            canvas.drawBitmap(life[0], (canvas.getWidth()/2)-100,50,null);
+            canvas.drawBitmap(life[heart], (canvas.getWidth()/2)-100,50,null);
             om.draw(canvas);
             skater.draw(canvas);
         }

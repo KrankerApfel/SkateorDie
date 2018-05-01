@@ -26,7 +26,13 @@ public class Obstacle implements GameObject{
     }
 
     public boolean collide(Player player){
-        return Rect.intersects(this.rec,player.getRectangle());
+        if(Rect.intersects(this.rec,player.getRectangle())){
+            spawnY = (int)(Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150;
+            this.set(spawnX, spawnY,spawnX+100,spawnY+100);
+            return true;
+        }
+
+        return false;
     }
 
     public void move(float spd ){

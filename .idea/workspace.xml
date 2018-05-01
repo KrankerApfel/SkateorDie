@@ -60,7 +60,7 @@
       <file leaf-file-name="ObstacleManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/ObstacleManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="-34">
               <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -72,8 +72,8 @@
       <file leaf-file-name="GameScreen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/GameScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="155" column="80" lean-forward="false" selection-start-line="155" selection-start-column="80" selection-end-line="155" selection-end-column="80" />
+            <state relative-caret-position="252">
+              <caret line="112" column="83" lean-forward="false" selection-start-line="112" selection-start-column="83" selection-end-line="112" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,12 +94,12 @@
       <file leaf-file-name="Obstacle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/Obstacle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+            <state relative-caret-position="357">
+              <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1446#1447#0" expanded="true" />
-                <element signature="e#1483#1484#0" expanded="true" />
+                <element signature="e#1649#1650#0" expanded="true" />
+                <element signature="e#1686#1687#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2146,14 +2146,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/GameObject.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/Player.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/Obstacle.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/ObstacleManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/Timer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/Obstacle.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/GameScreen.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="793" />
     <option name="width" value="814" />
     <option name="height" value="907" />
@@ -2373,7 +2373,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="916" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="916" extended-state="7" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2618,24 +2618,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/Obstacle.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/ObstacleManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+        <state relative-caret-position="-34">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1446#1447#0" expanded="true" />
-            <element signature="e#1483#1484#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/ObstacleManager.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/Obstacle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1649#1650#0" expanded="true" />
+            <element signature="e#1686#1687#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2650,8 +2650,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/waltherp38/skateordie/GameScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="155" column="80" lean-forward="false" selection-start-line="155" selection-start-column="80" selection-end-line="155" selection-end-column="80" />
+        <state relative-caret-position="252">
+          <caret line="112" column="83" lean-forward="false" selection-start-line="112" selection-start-column="83" selection-end-line="112" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
