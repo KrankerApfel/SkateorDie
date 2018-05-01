@@ -32,11 +32,12 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
-      /*  life       = new Bitmap[3];
-        p          = new Paint();
 
-        skater = new Player(new Rect(100,100,100,100), Color.BLUE);
-        skaterPoint = new Point(100,100);
+        skater = new Player(new Rect(100,100,100,100), Color.RED);
+        skaterPoint = new Point(20,60);
+
+        life       = new Bitmap[3];
+        p          = new Paint();
 
         // A chaque fois qu'on perd une vie on affichera une autre partie du tableau
         life[0]    = BitmapFactory.decodeResource(getResources(),R.drawable.heart3);
@@ -45,7 +46,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
 
         // tout ce qui concerne la font et color
         p.setColor(Color.BLUE);
-        p.setTextSize(32);*/
+        p.setTextSize(32);
 
     }
 
@@ -77,23 +78,31 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN :
+            case MotionEvent.ACTION_MOVE :
+                skaterPoint.set((int) event.getX(), (int) event.getY());
+
+        }
+        return true;
     }
 
     public void update(){
-
+        skater.update(skaterPoint);
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawText("Score :", 20,60,p);
+        canvas.drawBitmap(life[0], (canvas.getWidth()/2)-100,50,null);
+        skater.draw(canvas);
     }
 
     /*@Override
     // Dans cette fonction on affiche tout ce qui doit se dessiner à l'écran
     protected void onDraw(Canvas canvas) {
-        canvas.drawText("Score :", 20,60,p);
-        canvas.drawBitmap(life[0], (canvas.getWidth()/2)-100,50,null);
-        skater.draw(canvas);
+
     }*/
 }
