@@ -17,7 +17,7 @@ public class Player implements GameObject {
     @Override
     public void draw(Canvas canvas) {
         Paint p = new Paint();
-        p.setColor(color);
+        p.setColor(this.color);
         canvas.drawRect(rec,p);
     }
 
@@ -28,6 +28,5 @@ public class Player implements GameObject {
 
     public void update(Point pt){
         rec.set(pt.x - rec.width()/2, pt.y - rec.height()/2,pt.x +rec.width()/2,pt.y + rec.height()/2);
-
     }
 }

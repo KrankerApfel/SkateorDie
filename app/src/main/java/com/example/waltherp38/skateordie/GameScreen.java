@@ -20,21 +20,25 @@ import android.view.SurfaceView;
  */
 
 public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
-    private MainThread thread;
-    private Player skater;
-    private Point  skaterPoint;
-    private Bitmap bkg;    // background.
-    private Bitmap life[]; // tableau de trois image représentant les vies.
-    private Paint p;       // un paint est ce qui permet de gérer la font et couleur du texte.
+    private MainThread thread;   // thread pour la gestion de l'affichage
+    private Player skater;       // class modélisant le joueur
+    private Point  skaterPoint;  // position du joueur
+    private Bitmap bkg;          //  image background
+    private Bitmap life[];       // tableau des images pour les vies
+    private Paint p;             // un paint est ce qui permet de gérer la taille et la couleur du texte.
 
-    public GameScreen(Context context) { // récupère le context de la view dans laquelle il est intégré
+    /**
+    * Utilise le context de la view dans laquelle l'écran de jeu est intégré
+     * Le constructeur initialise tout les objets et variables utiles au jeu.
+    * */
+    public GameScreen(Context context) {
         super(context);
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
 
-        skater = new Player(new Rect(100,100,100,100), Color.RED);
-        skaterPoint = new Point(20,60);
+        skater = new Player(new Rect(100,100,200,200), Color.rgb(255,0,0));
+        skaterPoint = new Point(150,150);
 
         life       = new Bitmap[3];
         p          = new Paint();
@@ -98,11 +102,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText("Score :", 20,60,p);
         canvas.drawBitmap(life[0], (canvas.getWidth()/2)-100,50,null);
         skater.draw(canvas);
+        
     }
 
-    /*@Override
-    // Dans cette fonction on affiche tout ce qui doit se dessiner à l'écran
-    protected void onDraw(Canvas canvas) {
-
-    }*/
 }
