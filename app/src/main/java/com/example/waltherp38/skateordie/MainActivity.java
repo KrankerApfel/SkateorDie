@@ -1,5 +1,6 @@
 package com.example.waltherp38.skateordie;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btn;
     private Animation uptodown, downtoup;
     private ImageView deco;
-
+    private MediaPlayer theme;
+    private MediaPlayer title_theme;
     private GameScreen gs;
 
     @Override
@@ -33,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         gs = new GameScreen(this);      // C'est la view du jeu, on récupère le context de la view
+        theme = MediaPlayer.create(this, R.raw.main_theme);
+        theme.setLooping(true);
+        title_theme = MediaPlayer.create(this, R.raw.title_theme);
+        title_theme.setLooping(true);
+        title_theme.start();
+
 
 
         // Placement des boutton et animation
@@ -49,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(gs);
+                title_theme.stop();
+                theme.start();
             }
         });
     }
