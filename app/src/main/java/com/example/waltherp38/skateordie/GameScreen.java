@@ -47,8 +47,10 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         om = new ObstacleManager();
         this.timer = new Timer();
 
-        skater = new Player(new Rect(100,100,200,200), Color.rgb(255,0,0));
+        Bitmap skin = BitmapFactory.decodeResource(getResources(),R.drawable.spr_skater01);
+        skater = new Player(new Rect(0,0,skin.getWidth(),skin.getHeight()), Color.rgb(255,0,0),skin);
         skaterPoint = new Point(Constants.SCREEN_WIDTH/5,3*Constants.SCREEN_HEIGTH/4);
+
         playerIsMoving = false;
         gameOver = false;
 
