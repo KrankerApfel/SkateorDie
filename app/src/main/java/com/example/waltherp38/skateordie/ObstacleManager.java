@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 
 import java.util.ArrayList;
 
@@ -46,11 +45,6 @@ public class ObstacleManager {
             obstacle.move(speed*elapsedTime);
         }
 
-        /*if (obstacle.getRectangle().left < 0){
-            this.spawnY = (int) (Math.random() * (Constants.SCREEN_WIDTH - 100)) + 100;
-            obstacles.get(obstacles.size() - 1).set(spawnX, spawnY,spawnX+100,spawnY+100);
-            System.out.println("respawn at : " + spawnY);
-        }*/
     }
     public void draw(Canvas canvas){
         for (Obstacle obstacle : obstacles) {

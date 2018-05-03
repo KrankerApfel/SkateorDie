@@ -35,13 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         gs = new GameScreen(this);      // C'est la view du jeu, on récupère le context de la view
-        theme = MediaPlayer.create(this, R.raw.main_theme);
-        theme.setLooping(true);
-        title_theme = MediaPlayer.create(this, R.raw.title_theme);
-        title_theme.setLooping(true);
-        title_theme.start();
-
-
 
         // Placement des boutton et animation
         btn  = (Button) findViewById(R.id.btn);
@@ -50,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
         downtoup = AnimationUtils.loadAnimation(this,R.anim.downtoup);
         btn.setAnimation(downtoup);
         deco.setAnimation(uptodown);
+
+        theme = MediaPlayer.create(this, R.raw.main_theme);
+        theme.setLooping(true);
+        title_theme = MediaPlayer.create(this, R.raw.title_theme);
+        title_theme.setLooping(true);
+        title_theme.start();
 
         // Un listener pour détecter si on clic sur le bouton
         // si oui alors on affiche la view du jeu

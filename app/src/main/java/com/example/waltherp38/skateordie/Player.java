@@ -1,6 +1,5 @@
 package com.example.waltherp38.skateordie;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -22,7 +21,7 @@ public class Player implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        /* collision box
+        /* hitbox
         Paint p = new Paint();
         p.setColor(this.color);
         canvas.drawRect(rec,p);*/

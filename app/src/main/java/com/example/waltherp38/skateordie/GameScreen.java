@@ -28,17 +28,16 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     public boolean playerIsMoving;
     public boolean gameOver;
     public long gameOverTime;
-    private Rect r;
     private Point  skaterPoint;  // position du joueur
     private Bitmap bkg;          //  image background
     private Bitmap life[];       // tableau des images pour les vies
-    private int heart;
+    private int heart;           // indice de parcours du tableau life
     private Paint p;             // un paint est ce qui permet de gérer la taille et la couleur du texte.
     private Timer timer;
-    private SoundPool sfx;
-    private int hit;
-    private int loose;
-    private Context context;
+    private SoundPool sfx;       // pour les effets sonors
+    private int hit;             // son quand on se heurte à un obstacle
+    private int loose;          // son quand on perd
+    private Context context;    // context
 
     /**
     * Utilise le context de la view dans laquelle l'écran de jeu est intégré
