@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -33,6 +35,9 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private int heart;
     private Paint p;             // un paint est ce qui permet de gérer la taille et la couleur du texte.
     private Timer timer;
+    private SoundPool sfx;
+    private int hit;
+    private int loose;
 
     /**
     * Utilise le context de la view dans laquelle l'écran de jeu est intégré
@@ -68,6 +73,11 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         // tout ce qui concerne la font et color
         p.setColor(Color.BLUE);
         p.setTextSize(32);
+
+        // tout ce qui concerne les sounds fx
+        sfx  = new SoundPool.Builder().setMaxStreams(10).build();
+        hit = sfx.load(context, R.raw.hit, 1);
+        loose = sfx.load(context, R.raw.loose, 1);
 
     }
 
@@ -135,8 +145,10 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
             timer.tick();
             if(om.collide(skater)) {
                 heart++;
+                sfx.play(hit,1,1,0,0,1);
                 if (heart >= 3){
                     gameOver = true;
+                    sfx.play(loose, 1,1,0,0,1);
                     gameOverTime = System.currentTimeMillis();
                 }
 
