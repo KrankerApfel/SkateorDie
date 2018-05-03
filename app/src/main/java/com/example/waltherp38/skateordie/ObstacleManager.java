@@ -1,5 +1,8 @@
 package com.example.waltherp38.skateordie;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -9,11 +12,12 @@ import java.util.ArrayList;
 public class ObstacleManager {
     private ArrayList<Obstacle> obstacles;
     private long startTime;
+    private Context ctx;
 
 
-
-    public ObstacleManager(){
+    public ObstacleManager(Context ctx){
         this.obstacles = new ArrayList<Obstacle>();
+        this.ctx = ctx;
 
         this.startTime = System.currentTimeMillis();
 
@@ -22,7 +26,8 @@ public class ObstacleManager {
 
     private void generateObstacles(){
         for (int i = 0 ; i <5 ; i++) {
-            obstacles.add(new Obstacle(Color.rgb(0,55,200)));
+            Bitmap skin = BitmapFactory.decodeResource(ctx.getResources(),R.drawable.car);
+            obstacles.add(new Obstacle(Color.rgb(0,55,200),skin));
         }
     }
 

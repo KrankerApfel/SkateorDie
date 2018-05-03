@@ -38,6 +38,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private SoundPool sfx;
     private int hit;
     private int loose;
+    private Context context;
 
     /**
     * Utilise le context de la view dans laquelle l'écran de jeu est intégré
@@ -48,8 +49,8 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
-
-        om = new ObstacleManager();
+        this.context = context;
+        om = new ObstacleManager(context);
         this.timer = new Timer();
 
         Bitmap skin = BitmapFactory.decodeResource(getResources(),R.drawable.spr_skater01);
@@ -86,7 +87,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         heart = 0;
         skaterPoint = new Point(Constants.SCREEN_WIDTH/5,3*Constants.SCREEN_HEIGTH/4);
         playerIsMoving = false;
-        om = new ObstacleManager();
+        om = new ObstacleManager(context);
     }
 
     @Override
@@ -165,8 +166,8 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawBitmap(bkg, 0, canvas.getHeight() - bkg.getHeight(),null);
             canvas.drawText("Time :"+timer.getLabel(), 20,60,p);
             canvas.drawBitmap(life[heart], (canvas.getWidth()/2)-100,50,null);
-            om.draw(canvas);
             skater.draw(canvas);
+            om.draw(canvas);
         }
 
        else{
