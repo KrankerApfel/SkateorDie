@@ -57,9 +57,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(gs);
-                title_theme.stop();
-                theme.start();
+                if (title_theme.isPlaying()) title_theme.stop();
+                if (!theme.isPlaying()) theme.start();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (title_theme.isPlaying()) title_theme.release();
+        if (theme.isPlaying()) theme.release();
+        finish();
     }
 }
