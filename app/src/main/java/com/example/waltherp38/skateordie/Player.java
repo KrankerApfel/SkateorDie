@@ -21,10 +21,10 @@ public class Player implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        /* hitbox
+        /* hitbox*/
         Paint p = new Paint();
         p.setColor(this.color);
-        canvas.drawRect(rec,p);*/
+        canvas.drawRect(rec,p);
         canvas.drawBitmap(this.skin,rec.left,rec.top,null);
     }
 

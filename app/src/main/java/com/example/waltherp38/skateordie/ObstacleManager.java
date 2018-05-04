@@ -24,10 +24,27 @@ public class ObstacleManager {
     }
 
     private void generateObstacles(){
-        for (int i = 0 ; i <5 ; i++) {
-            Bitmap skin = BitmapFactory.decodeResource(ctx.getResources(),R.drawable.car);
-            obstacles.add(new Obstacle(Color.rgb(0,55,200),skin));
+        Bitmap skin;
+       /* for (int i = 0 ; i <2 ; i++) {
+            skin = BitmapFactory.decodeResource(ctx.getResources(),R.drawable.car);
+            obstacles.add(new Car(Color.rgb(0,55,200),skin));
         }
+        for (int i = 0 ; i <5 ; i++) {
+            skin = BitmapFactory.decodeResource(ctx.getResources(),R.drawable.dog);
+            obstacles.add(new Dog(Color.rgb(0,55,200),skin));
+        }*/
+
+       for (int i = 0; i <10; i++){
+           if(i%3 == 0){
+               skin = BitmapFactory.decodeResource(ctx.getResources(),R.drawable.car);
+               obstacles.add(new Car(Color.rgb(0,55,200),skin));
+           }
+           else{
+               skin = BitmapFactory.decodeResource(ctx.getResources(),R.drawable.dog);
+               obstacles.add(new Dog(Color.rgb(0,55,200),skin));
+           }
+
+       }
     }
 
     public boolean collide(Player player){
