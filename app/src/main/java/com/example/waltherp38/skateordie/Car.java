@@ -26,6 +26,7 @@ public class Car extends Obstacle implements GameObject {
     }
 
 
+
     @Override
     /**
      * Check la collision avec le joueur
@@ -33,7 +34,7 @@ public class Car extends Obstacle implements GameObject {
     public boolean collide(Player player){
         if(Rect.intersects(this.rec,player.getRectangle())){
             spawnY = (int)(Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150;
-            this.set(spawnX, spawnY+skin.getHeight()/2,spawnX+skin.getWidth(),spawnY+skin.getHeight());System.out.println("collide car");
+            this.rec    = new Rect(spawnX, spawnY+skin.getHeight()/2,spawnX+skin.getWidth(),spawnY+skin.getHeight());
             return true;
         }
 
@@ -43,17 +44,19 @@ public class Car extends Obstacle implements GameObject {
 
     @Override
     /**
-     * Fait avanceer l'obstacle
+     * Fait avancer l'obstacle
      * */
     public void move(float spd ){
         this.rec.left  -= spd;
         this.rec.right -= spd;
 
         if(this.rec.right < 0){
-            spawnY = (int)(Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150;
-            this.set(spawnX, spawnY+skin.getHeight()/2,spawnX+skin.getWidth(),spawnY+skin.getHeight());
+            spawnY    = (int)(Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150;
+            this.rec  = new Rect(spawnX, spawnY+skin.getHeight()/2,spawnX+skin.getWidth(),spawnY+skin.getHeight());
         }
     }
+
+
 
     @Override
     /**
