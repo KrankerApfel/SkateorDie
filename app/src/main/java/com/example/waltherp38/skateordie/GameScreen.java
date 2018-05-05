@@ -29,7 +29,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     public boolean gameOver;
     public long gameOverTime;
     private Point  skaterPoint;  // position du joueur
-    private Bitmap bkg;          //  image background
+    private Road bkg;          //  image background
     private Bitmap life[];       // tableau des images pour les vies
     private int heart;           // indice de parcours du tableau life
     private Paint p;             // un paint est ce qui permet de gérer la taille et la couleur du texte.
@@ -68,7 +68,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         life[1]    = BitmapFactory.decodeResource(getResources(),R.drawable.heart2);
         life[2]    = BitmapFactory.decodeResource(getResources(),R.drawable.heart1);
 
-        bkg        = BitmapFactory.decodeResource(getResources(),R.drawable.road);
+        bkg        = new Road(Color.YELLOW,BitmapFactory.decodeResource(getResources(),R.drawable.road),10);
 
         // tout ce qui concerne la font et color
         p.setColor(Color.BLUE);
@@ -142,6 +142,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         if(!gameOver){
             skater.update(skaterPoint);
             om.update();
+            bkg.update();
             timer.tick();
             if(om.collide(skater)) {
                 heart++;
@@ -162,7 +163,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
 
         if (!gameOver){
             canvas.drawColor(Color.rgb(119,208,130));
-            canvas.drawBitmap(bkg, 0, canvas.getHeight() - bkg.getHeight(),null);
+            bkg.draw(canvas);
             canvas.drawText("Time :"+timer.getLabel(), 20,60,p);
             canvas.drawBitmap(life[heart], (canvas.getWidth()/2)-100,50,null);
             skater.draw(canvas);
