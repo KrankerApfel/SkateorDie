@@ -17,7 +17,7 @@ public class Road implements GameObject {
         this.color = color;
         this.skin = skin;
         this.rec = new Rect(0, Constants.SCREEN_HEIGTH - skin.getHeight(),skin.getWidth(),skin.getHeight());
-        this.rec2 = new Rect(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGTH - skin.getHeight(),Constants.SCREEN_WIDTH+skin.getWidth(),skin.getHeight());
+        this.rec2 = new Rect(rec.right, Constants.SCREEN_HEIGTH - skin.getHeight(),rec.right+skin.getWidth(),skin.getHeight());
         this.speed = spd;
     }
     @Override

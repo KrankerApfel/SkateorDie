@@ -26,11 +26,13 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private ObstacleManager om;
     private Player skater;       // class modélisant le joueur
     public boolean playerIsMoving;
+    public boolean playerIsMovingLeft;
+    public boolean playerIsMovingRight;
     public boolean gameOver;
     public long gameOverTime;
     private Point  skaterPoint;  // position du joueur
     private Road bkg;          //  image background
-    private Bitmap life[];       // tableau des images pour les vies
+    private Bitmap life[];  // tableau des images pour les vies
     private int heart;           // indice de parcours du tableau life
     private Paint p;             // un paint est ce qui permet de gérer la taille et la couleur du texte.
     private Timer timer;
@@ -38,11 +40,13 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private int hit;             // son quand on se heurte à un obstacle
     private int loose;          // son quand on perd
     private Context context;    // context
+    private OrientationData orientationData;
+    private long frameTime;
 
     /**
-    * Utilise le context de la view dans laquelle l'écran de jeu est intégré
+     * Utilise le context de la view dans laquelle l'écran de jeu est intégré
      * Le constructeur initialise tout les objets et variables utiles au jeu.
-    * */
+     * */
     public GameScreen(Context context) {
         super(context);
         getHolder().addCallback(this);
@@ -79,6 +83,9 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         hit = sfx.load(context, R.raw.hit, 1);
         loose = sfx.load(context, R.raw.loose, 1);
 
+        orientationData = new OrientationData();
+        orientationData.register();
+        frameTime = System.currentTimeMillis();
     }
 
     public void reset(){
@@ -119,16 +126,32 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN :
-                if (!gameOver && skater.getRectangle().contains((int) event.getX(), (int) event.getY())){
-                    playerIsMoving = true;
+                if (!gameOver){
+                    if(skaterPoint.x > getX()){
+                        playerIsMoving = true;
+                        playerIsMovingLeft = true;
+                        System.out.println("///////////////////LEFT/////////////////" + skater.getRectangle().right);
+                    }
+                    if(skaterPoint.x <  getX()){
+                        playerIsMoving = true;
+                        playerIsMovingRight = true;
+                        System.out.println("///////////////////RIGHT/////////////////" + skater.getRectangle().right);
+                    }
                 }
                 else if (gameOver && System.currentTimeMillis() - gameOverTime >= 1000){
                     this.reset();
                     gameOver = false;
+                    orientationData.newGame();
                 }break;
             case MotionEvent.ACTION_MOVE :
                 if (!gameOver && playerIsMoving) {
-                    skaterPoint.set((int) event.getX(), (int) event.getY());
+                    //skaterPoint.set((int) event.getX(), (int) event.getY());
+                    if(playerIsMovingRight){
+                        skaterPoint.x += 5;
+                    }
+                    else if(playerIsMovingLeft){
+                        skaterPoint.x -= 5;
+                    }
                 }break;
             case MotionEvent.ACTION_UP:
                 playerIsMoving = false;
@@ -140,6 +163,30 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update(){
         if(!gameOver){
+            int elapsedTime = (int)(System.currentTimeMillis() - frameTime);
+            frameTime = System.currentTimeMillis();
+            if(orientationData.getOrientation() != null && orientationData.getStartOrientation() != null){
+                float pitch = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];
+                //float roll = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];
+
+                //float xSpeed = 2 * roll * Constants.SCREEN_WIDTH / 1000f;
+                float ySpeed = pitch * Constants.SCREEN_HEIGTH / 1000f;
+
+                //skaterPoint.x -= Math.abs(xSpeed*elapsedTime)> 5 ? xSpeed*elapsedTime : 0;
+                skaterPoint.y -= Math.abs(ySpeed*elapsedTime)> 5 ? ySpeed*elapsedTime : 0;
+
+            }
+
+            if(skaterPoint.x < 0)
+                skaterPoint.x = 0;
+            else if(skaterPoint.x > Constants.SCREEN_WIDTH)
+                skaterPoint.x = Constants.SCREEN_WIDTH;
+
+            if(skaterPoint.y < 0)
+                skaterPoint.y = 0;
+            else if(skaterPoint.y > Constants.SCREEN_HEIGTH)
+                skaterPoint.y = Constants.SCREEN_HEIGTH;
+
             skater.update(skaterPoint);
             om.update();
             bkg.update();
@@ -170,7 +217,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
             om.draw(canvas);
         }
 
-       else{
+        else{
             Paint pp = new Paint();
             pp.setColor(Color.rgb(255, 255, 255));
             pp.setTextSize(100);

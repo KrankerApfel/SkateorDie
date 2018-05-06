@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         Constants.SCREEN_WIDTH = dm.widthPixels;
         Constants.SCREEN_HEIGTH = dm.heightPixels;
-
+        Constants.CURRENT_CONTEXT = this;
 
         gs = new GameScreen(this);      // C'est la view du jeu, on récupère le context de la view
 
