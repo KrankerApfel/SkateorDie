@@ -51,7 +51,7 @@ public class Car extends Obstacle implements GameObject {
         this.rec.right -= spd;
 
         if(this.rec.right < 0){
-            spawnY    = (int)(Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150;
+            spawnY    = (int)(((Math.random() * ((Constants.SCREEN_WIDTH/2.8) - 150)) + 150)/30)*30;
             this.rec  = new Rect(spawnX, spawnY+skin.getHeight()/2,spawnX+skin.getWidth(),spawnY+skin.getHeight());
         }
     }
@@ -63,10 +63,10 @@ public class Car extends Obstacle implements GameObject {
      * Dessine sur le canvas
      **/
     public void draw(Canvas canvas) {
-        /* draw hit box*/
+        /* draw hit box
         Paint p = new Paint();
         p.setColor(this.color);
-        canvas.drawRect(rec,p);
+        canvas.drawRect(rec,p);*/
         canvas.drawBitmap(this.skin,rec.left,rec.top - skin.getHeight()/2,null);
 
     }

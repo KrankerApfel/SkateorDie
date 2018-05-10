@@ -26,8 +26,8 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private ObstacleManager om;
     private Player skater;       // class modélisant le joueur
     public boolean playerIsMoving;
-    public boolean playerIsMovingLeft;
-    public boolean playerIsMovingRight;
+    public boolean playerIsMovingLeft = false;
+    public boolean playerIsMovingRight = false;
     public boolean gameOver;
     public long gameOverTime;
     private Point  skaterPoint;  // position du joueur
@@ -127,16 +127,18 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN :
                 if (!gameOver){
-                    if(skaterPoint.x > getX()){
-                        playerIsMoving = true;
+                    /*(skaterPoint.x > getX()){
+                       playerIsMoving = true;
                         playerIsMovingLeft = true;
+                        skaterPoint.set(skaterPoint.x+5,skaterPoint.y);
                         System.out.println("///////////////////LEFT/////////////////" + skater.getRectangle().right);
                     }
                     if(skaterPoint.x <  getX()){
                         playerIsMoving = true;
                         playerIsMovingRight = true;
+                        skaterPoint.set(skaterPoint.x-5,skaterPoint.y);
                         System.out.println("///////////////////RIGHT/////////////////" + skater.getRectangle().right);
-                    }
+                    }*/
                 }
                 else if (gameOver && System.currentTimeMillis() - gameOverTime >= 1000){
                     this.reset();
@@ -144,14 +146,15 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
                     orientationData.newGame();
                 }break;
             case MotionEvent.ACTION_MOVE :
-                if (!gameOver && playerIsMoving) {
-                    //skaterPoint.set((int) event.getX(), (int) event.getY());
-                    if(playerIsMovingRight){
-                        skaterPoint.x += 5;
+                if (!gameOver && playerIsMoving) {/*
+                    if(skaterPoint.x > getX() && playerIsMovingLeft){
+                        skaterPoint.set(skaterPoint.x+5,skaterPoint.y);
+                        System.out.println("///////////////////LEFT/////////////////" + skater.getRectangle().right);
                     }
-                    else if(playerIsMovingLeft){
-                        skaterPoint.x -= 5;
-                    }
+                    if(skaterPoint.x <  getX() && playerIsMovingRight){
+                        skaterPoint.set(skaterPoint.x-5,skaterPoint.y);
+                        System.out.println("///////////////////RIGHT/////////////////" + skater.getRectangle().right);
+                    }*/
                 }break;
             case MotionEvent.ACTION_UP:
                 playerIsMoving = false;
@@ -167,25 +170,25 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
             frameTime = System.currentTimeMillis();
             if(orientationData.getOrientation() != null && orientationData.getStartOrientation() != null){
                 float pitch = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];
-                //float roll = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];
+                float roll = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];
 
-                //float xSpeed = 2 * roll * Constants.SCREEN_WIDTH / 1000f;
+                float xSpeed = 2 * roll * Constants.SCREEN_WIDTH / 1000f;
                 float ySpeed = pitch * Constants.SCREEN_HEIGTH / 1000f;
-
-                //skaterPoint.x -= Math.abs(xSpeed*elapsedTime)> 5 ? xSpeed*elapsedTime : 0;
-                skaterPoint.y -= Math.abs(ySpeed*elapsedTime)> 5 ? ySpeed*elapsedTime : 0;
-
+                if(skaterPoint.x > 0 && skaterPoint.x < Constants.SCREEN_WIDTH)
+                    skaterPoint.x -= Math.abs(xSpeed*elapsedTime)> 2 ? xSpeed*elapsedTime : 0;
+                if(skaterPoint.y > Constants.SCREEN_HEIGTH/4 && skaterPoint.y < Constants.SCREEN_HEIGTH)
+                skaterPoint.y -= Math.abs(ySpeed*elapsedTime)> 2 ? ySpeed*elapsedTime : 0;
             }
 
-            if(skaterPoint.x < 0)
-                skaterPoint.x = 0;
-            else if(skaterPoint.x > Constants.SCREEN_WIDTH)
-                skaterPoint.x = Constants.SCREEN_WIDTH;
+            if(skaterPoint.x <= 0)
+                skaterPoint.x = 5;
+            else if(skaterPoint.x >= Constants.SCREEN_WIDTH)
+                skaterPoint.x = Constants.SCREEN_WIDTH - 5 ;
 
-            if(skaterPoint.y < 0)
-                skaterPoint.y = 0;
-            else if(skaterPoint.y > Constants.SCREEN_HEIGTH)
-                skaterPoint.y = Constants.SCREEN_HEIGTH;
+            if(skaterPoint.y <= Constants.SCREEN_HEIGTH/4)
+                skaterPoint.y = Constants.SCREEN_HEIGTH/4 + 5;
+            else if(skaterPoint.y >= Constants.SCREEN_HEIGTH*4/5)
+                skaterPoint.y = Constants.SCREEN_HEIGTH*4/5 - 5 ;
 
             skater.update(skaterPoint);
             om.update();
@@ -211,7 +214,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         if (!gameOver){
             canvas.drawColor(Color.rgb(119,208,130));
             bkg.draw(canvas);
-            canvas.drawText("Time :"+timer.getLabel(), 20,60,p);
+            canvas.drawText("Score :"+timer.getScore(), 20,60,p);
             canvas.drawBitmap(life[heart], (canvas.getWidth()/2)-100,50,null);
             skater.draw(canvas);
             om.draw(canvas);
@@ -222,7 +225,8 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
             pp.setColor(Color.rgb(255, 255, 255));
             pp.setTextSize(100);
             canvas.drawText("GAME OVER", Constants.SCREEN_WIDTH/5,Constants.SCREEN_HEIGTH/3,pp);
-            canvas.drawText("Time : "+timer.getLabel(), Constants.SCREEN_WIDTH/4,Constants.SCREEN_HEIGTH/2,pp);
+            canvas.drawText("Score : "+timer.getScore(), Constants.SCREEN_WIDTH/4,Constants.SCREEN_HEIGTH/2,pp);
+            canvas.drawText("Time : "+timer.getLabel2(), Constants.SCREEN_WIDTH/4,Constants.SCREEN_HEIGTH*4/6,pp);
         }
     }
 

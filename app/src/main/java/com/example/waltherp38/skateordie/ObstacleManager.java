@@ -12,6 +12,8 @@ public class ObstacleManager {
     private ArrayList<Obstacle> obstacles;
     private long startTime;
     private Context ctx;
+    private float speed = Constants.SCREEN_HEIGTH/1950.0f;
+    int much = 1;
 
 
     public ObstacleManager(Context ctx){
@@ -56,12 +58,12 @@ public class ObstacleManager {
 
     public void update(){
         long elapsedTime = (int) (System.currentTimeMillis()- startTime);
+        int much = 1;
         startTime = System.currentTimeMillis();
-        float speed = Constants.SCREEN_HEIGTH/1950.0f;
-        for (Obstacle obstacle : obstacles) {
-            obstacle.move(speed*elapsedTime);
+        for (int i = 0 ; i < obstacles.size() ; i++) {
+            obstacles.get(i).move(speed*elapsedTime);
         }
-
+        speed += Constants.SCREEN_HEIGTH/19500000.0f;
     }
     public void draw(Canvas canvas){
         for (Obstacle obstacle : obstacles) {

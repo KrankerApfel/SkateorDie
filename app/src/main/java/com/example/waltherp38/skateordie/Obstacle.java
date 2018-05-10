@@ -78,10 +78,10 @@ public class Obstacle implements GameObject{
      * Dessine sur le canvas
      **/
     public void draw(Canvas canvas) {
-        /* draw hit box*/
+        /* draw hit box
         Paint p = new Paint();
         p.setColor(this.color);
-        canvas.drawRect(rec,p);
+        canvas.drawRect(rec,p);*/
         canvas.drawBitmap(this.skin,rec.left,rec.top,null);
 
     }
